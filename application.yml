@@ -9,11 +9,11 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
 
-
 management:
   endpoint:
     health:
       show-details: always
+      
   health:
     circuitbreakers:
       enabled: true
