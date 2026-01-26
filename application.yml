@@ -3,12 +3,11 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka
-    fetch-registry: true
-    register-with-eureka: true
     
   instance:
     preferIpAddress: true
-    
+    fetch-registry: true
+    register-with-eureka: true   
 
 management:
   endpoint:
