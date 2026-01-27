@@ -34,6 +34,13 @@ management:
   health:
     circuitbreakers:
       enabled: true
+  info:
+    env:
+      enabled: true    # Required to show properties starting with "info.*"
+    java:
+      enabled: true    # Optional: shows Java version info
+    build:
+      enabled: true    # Optional: shows build version from Maven/Gradle      
 
 resilience4j:
   circuitbreaker:
