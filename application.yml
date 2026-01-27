@@ -23,15 +23,16 @@ management:
   endpoint:
     health:
       show-details: always
-      
-  health:
-    circuitbreakers:
-      enabled: true
+
   endpoints:
     web:
       exposure:
-        include: "health,info,circuitbreakers"
+        include: circuitbreakers
 
+  health:
+    circuitbreakers:
+      enabled: true
+      
 resilience4j:
   circuitbreaker:
     instances:
