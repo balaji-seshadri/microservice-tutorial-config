@@ -15,6 +15,10 @@ eureka:
     fetch-registry: true
     register-with-eureka: true   
 
+    endpoint:
+    circuitbreakers:
+      enabled: true
+
 management:
   endpoint:
     health:
