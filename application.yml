@@ -1,48 +1,49 @@
+server:
+  port: 8098
+
 spring:
+  application:
+    name: USER-SERVICE
   cloud:
     config:
       server:
         git:
           uri: https://github.com/balaji-seshadri/microservice-tutorial-config
+
 eureka:
   client:
     serviceUrl:
       defaultZone: http://eureka-server:8761/eureka/
-
+    fetch-registry: true
+    register-with-eureka: true   
   instance:
     instance-id: ${spring.application.name}:${random.value}
     preferIpAddress: true
-    fetch-registry: true
-    register-with-eureka: true   
 
-endpoint:
-    circuitbreakers:
-      enabled: true
-
+# CONSOLIDATED MANAGEMENT BLOCK
 management:
-  endpoint:
-    health:
-      show-details: always
-
   endpoints:
     web:
       exposure:
-        include: circuitbreakers,health,info
-
+        include: "health,info,circuitbreakers" # Use quotes to be safe
+  endpoint:
+    health:
+      show-details: always
+    circuitbreakers:
+      enabled: true
   health:
     circuitbreakers:
       enabled: true
-      
+
 resilience4j:
   circuitbreaker:
     instances:
       ratingHotelBreaker:
         registerHealthIndicator: true
-        eventConsumerBufferSize: 10
+        slidingWindowSize: 10
         failureRateThreshold: 50
         minimumNumberOfCalls: 5
-        automaticTransitionFromOpenToHalfOpenEnabled: true
         waitDurationInOpenState: 6s
         permittedNumberOfCallsInHalfOpenState: 3
-        slidingWindowSize: 10
-        slidingWindowType: COUNT_BASED
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        eventConsumerBufferSize: 10
