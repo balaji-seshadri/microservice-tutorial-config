@@ -27,7 +27,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: circuitbreakers
+        include: circuitbreakers,health,info
 
   health:
     circuitbreakers:
